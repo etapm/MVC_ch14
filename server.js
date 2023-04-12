@@ -1,4 +1,3 @@
-// Import necessary dependencies and middleware
 const express = require("express");
 const exphbs = require("express-handlebars");
 const session = require("express-session");
@@ -10,14 +9,21 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Set up Express to use Handlebars as the view engine
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Configure the session
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
+app.use(
+  "/css",
+  express.static(__dirname + "../public/css", {
+    setHeaders: function (res, path) {
+      res.setHeader("Content-Type", mime.getType(path));
+    },
+  })
+);
 
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
@@ -27,7 +33,7 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 30 * 60 * 1000, // 30 minutes in milliseconds
+    maxAge: 30 * 60 * 1000,
     secure: false,
     httpOnly: true,
   },
@@ -35,10 +41,8 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
-// Set up the server to use your routes
 app.use(routes);
 
-// Start the server
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () =>
     console.log(`Server is running on http://localhost:${PORT}`)
