@@ -1,0 +1,17 @@
+[
+  {
+    "comment_text": "Coding is super hard but rewarding.",
+    "post_id": 2,
+    "user_id": 1
+  },
+  {
+    "comment_text": "Handlebars is a handy tool, all coders should know about it.",
+    "post_id": 1,
+    "user_id": 3
+  },
+  {
+    "comment_text": "Will the Warriors win the 2023 Championship?",
+    "post_id": 3,
+    "user_id": 2
+  }
+]

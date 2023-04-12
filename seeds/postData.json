@@ -1,0 +1,18 @@
+[
+  {
+    "title": "The Benefits of Using MVC in Software Engineering",
+    "contents": "MVC, or Model-View-Controller, is a design pattern that allows developers to split their application into specific sections with individual purposes, making it easier to logically structure and secure their code. In this tutorial, we'll break down each aspect of the pattern and explore its benefits.",
+    "user_id": 1
+  },
+  {
+    "title": "Handling Requests with Express Routing in Node.js",
+    "contents": "Express.js provides an 'app' object for handling HTTP requests. Different methods of the 'app' object are used to define routes for different types of requests, with each route specifying a callback function that is called upon receiving the request. In this article, we'll explore how to use Express routing to handle different types of requests.",
+    "topic": "Job Offers",
+    "user_id": 2
+  },
+  {
+    "title": "Understanding Sequelize Models in Database Management",
+    "contents": "Sequelize models are an essential component of the Sequelize ORM framework for Node.js, providing an abstraction that represents a database table as a class that extends Model. Models convey vital information about the entity they represent, including the table's name and the columns it contains. In this article, we'll explore the basics of Sequelize models and how they can help you manage your database more effectively.",
+    "user_id": 3
+  }
+]
