@@ -25,6 +25,7 @@ Post.init(
         model: "user",
         key: "id",
       },
+      field: "user_id", // Add this line
     },
   },
   {

@@ -1,0 +1,49 @@
+<!-- login.handlebars -->
+
+<div class="columns is-centered">
+  <div class="column is-one-third">
+    <form id="login-form">
+      <div class="field">
+        <label class="label" for="username-input">Username</label>
+        <div class="control has-icons-left">
+          <input
+            class="input"
+            type="text"
+            placeholder="Username"
+            id="username-input"
+            name="username"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label" for="password-input">Password</label>
+        <div class="control has-icons-left">
+          <input
+            class="input"
+            type="password"
+            placeholder="Password"
+            id="password-input"
+            name="password"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </div>
+      </div>
+      <div class="field is-grouped is-grouped-centered">
+        <div class="control">
+          <button id="login-submit-btn" class="button is-link" type="submit">Log
+            In</button>
+        </div>
+        <div class="control">
+          <button id="create-account-btn" class="button is-text">Create Account</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/js/login.js"></script>

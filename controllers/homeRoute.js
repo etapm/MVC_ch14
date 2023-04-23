@@ -6,7 +6,12 @@ const sequelize = require("../config/connection");
 router.get("/", async (req, res) => {
   try {
     const posted = await Post.findAll({
-      include: [{ model: User }],
+      include: [
+        {
+          model: User,
+          attributes: ["id", "email", "username"],
+        },
+      ],
     });
     const posts = posted.map((post) => post.get({ plain: true }));
 
@@ -32,7 +37,7 @@ router.get("/post/:id", async (req, res) => {
               include: [
                 {
                   model: User,
-                  attributes: ["user_name"],
+                  attributes: ["username"], // Updated this line to use "username"
                 },
               ],
             },

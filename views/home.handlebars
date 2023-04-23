@@ -1,0 +1,48 @@
+<div class="container">
+  <section class="hero is-info">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Welcome to The Tech Blog!
+        </h1>
+        <h2 class="subtitle">
+          A place to share your ideas and insights about technology.
+        </h2>
+      </div>
+    </div>
+  </section>
+  <div class="columns">
+    <div class="column is-8">
+      {{#each posts}}
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">{{this.title}}</p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              {{this.body}}
+            </div>
+          </div>
+          <footer class="card-footer">
+            <a href="#" class="card-footer-item">Edit</a>
+            <a href="#" class="card-footer-item">Delete</a>
+          </footer>
+        </div>
+      {{/each}}
+    </div>
+    <div class="column is-4">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">Search Posts</p>
+        </header>
+        <div class="card-content">
+          <div class="field">
+            <div class="control">
+              <input class="input" type="text" placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

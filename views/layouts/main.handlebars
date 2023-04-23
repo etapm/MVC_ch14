@@ -1,37 +1,55 @@
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Tech Blog</title>
     <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
+    />
   </head>
 
   <body>
-    <div class="wrapper">
-      <header>
-        <h1>
-          <a href="/">The Tech Blog</a>
-        </h1>
-        <nav id="navigation">
-          <span><a href="/">Home</a></span>
-          {{#if loggedIn}}
-            <a href="/dashboard">Dashboard</a>
-            <button id="logout" class="btn-no-style">Logout</button>
-          {{else}}
-            <a href="/login">Login</a>
-          {{/if}}
+    <section class="hero is-info is-small">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="/">
+                <span
+                  class="has-text-weight-bold is-size-3 has-text-centered"
+                >The Tech Blog</span>
+              </a>
+              <span class="navbar-burger burger" data-target="navbarMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item" href="/">Home</a>
+                <a class="navbar-item" href="/dashboard">Dashboard</a>
+                {{#if loggedIn}}
+                  <a class="navbar-item" id="logout">Logout</a>
+                {{else}}
+                  <a class="navbar-item" href="/login">Login</a>
+                  <a class="navbar-item" href="/signup">Create Account</a>
+                {{/if}}
+              </div>
+            </div>
+          </div>
         </nav>
-      </header>
-      <main>
-        {{{body}}}
-      </main>
-    </div>
+      </div>
 
-    {{#if loggedIn}}
-      <script src="/public/js/logout.js"></script>
-    {{/if}}
+      <div class="hero-body">
+        <div class="container has-text-centered"></div>
+      </div>
+      <div class="container">
+        {{{body}}}
+      </div>
+    </section>
 
   </body>
-
 </html>

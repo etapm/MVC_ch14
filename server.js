@@ -1,42 +1,40 @@
-const express = require("express");
-const exphbs = require("express-handlebars");
-const session = require("express-session");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
-const sequelize = require("./config/connection");
-const routes = require("./controllers");
-require("dotenv").config();
 const path = require("path");
+const express = require("express");
+const session = require("express-session");
+const exphbs = require("express-handlebars");
+
+const routes = require("./controllers");
+const { sequelize } = require("./models"); // Import the 'sequelize' instance from 'models'
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+const hbs = exphbs.create({});
 
+const sess = {
+  secret: "Super secret secret",
+  cookie: {
+    // Stored in milliseconds
+    maxAge: 24 * 60 * 60 * 1000, // expires after 1 day
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
+
+app.use(session(sess));
+
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
-const sessionConfig = {
-  secret: process.env.SESSION_SECRET,
-  store: new SequelizeStore({
-    db: sequelize,
-  }),
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    maxAge: 30 * 60 * 1000,
-    secure: false,
-    httpOnly: true,
-  },
-};
-
-app.use(session(sessionConfig));
-
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () =>
-    console.log(`Server is running on http://localhost:${PORT}`)
-  );
+  app.listen(PORT, () => console.log("Now listening on port: " + PORT));
 });

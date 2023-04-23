@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-3">
+      <aside class="menu">
+        <p class="menu-label">
+          General
+        </p>
+        <ul class="menu-list">
+          <li><a href="#">Dashboard</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="#">Settings</a></li>
+        </ul>
+        <p class="menu-label">
+          Administration
+        </p>
+        <ul class="menu-list">
+          <li><a href="#">Users</a></li>
+          <li><a href="#">Roles</a></li>
+          <li><a href="#">Permissions</a></li>
+        </ul>
+      </aside>
+    </div>
+    <div class="column is-9">
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              Dashboard
+            </h1>
+            <h2 class="subtitle">
+              Welcome to your dashboard.
+            </h2>
+
+            {{#if posts.length}}
+              <h3>Your Posts:</h3>
+              <ul>
+                {{#each posts}}
+                  <li>
+                    <a href="/edit-delete-post/{{this.id}}">{{this.title}}</a>
+                    <button
+                      class="my-button"
+                      data-id="{{this.id}}"
+                    >Delete</button>
+                  </li>
+                {{/each}}
+              </ul>
+            {{else}}
+              <p>You have not created any posts yet.</p>
+            {{/if}}
+
+            <h3>Create a New Post:</h3>
+            <form>
+              <div class="form-group">
+                <label for="post-title">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="post-title"
+                  name="title"
+                  placeholder="Enter title"
+                />
+              </div>
+              <div class="form-group">
+                <label for="post-content">Content</label>
+                <textarea
+                  class="form-control"
+                  id="post-content"
+                  name="content"
+                  placeholder="Enter content"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Create Post</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+  const deleteButtons = document.querySelectorAll('.my-button');
+  deleteButtons.forEach((button) => { button.addEventListener('click', (event)
+  => { event.preventDefault(); // Prevent the button from navigating away from
+  the page const postId = button.dataset.id; // Do something else instead, such
+  as show a confirmation dialog or submit a delete request via AJAX }); });
+</script>
