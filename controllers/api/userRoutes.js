@@ -3,6 +3,7 @@ const session = require("express-session");
 const withAuth = require("../../utils/auth");
 const express = require("express");
 const router = express.Router();
+const Sequelize = require("sequelize");
 
 router.get("/", async (req, res) => {
   try {
@@ -60,7 +61,11 @@ router.post("/", async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(400).json(err);
+    if (err instanceof Sequelize.UniqueConstraintError) {
+      res.status(400).json({ message: "Email or username already in use" });
+    } else {
+      res.status(400).json(err);
+    }
   }
 });
 

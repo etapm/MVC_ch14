@@ -1,5 +1,3 @@
-// login.js
-
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -13,6 +11,8 @@ const loginFormHandler = async (event) => {
       headers: { "Content-Type": "application/json" },
     });
 
+    console.log("Login response:", response);
+
     if (response.ok) {
       document.location.replace("/");
     } else {
@@ -24,17 +24,13 @@ const loginFormHandler = async (event) => {
 const redirectCreate = (event) => {
   event.preventDefault();
 
-  document.location.replace("/create-account");
+  document.location.replace("/signup");
 };
 
-// Select the login form element and add an event listener for when it is submitted
 const loginForm = document.querySelector("#login-form");
 loginForm.addEventListener("submit", loginFormHandler);
 
-// Select the login submit button and add an event listener for when it is clicked
-const loginSubmitBtn = document.querySelector("#login-submit-btn");
-loginSubmitBtn.addEventListener("click", loginFormHandler);
-
-// Select the create account button and add an event listener for when it is clicked
 const createAccountBtn = document.querySelector("#create-account-btn");
 createAccountBtn.addEventListener("click", redirectCreate);
+
+console.log("Login script loaded");
