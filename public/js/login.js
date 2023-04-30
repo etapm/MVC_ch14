@@ -13,11 +13,16 @@ const loginFormHandler = async (event) => {
 
     console.log("Login response:", response);
 
+    const responseBody = await response.json();
+    console.log("Response body:", responseBody);
+
     if (response.ok) {
       document.location.replace("/");
     } else {
       alert("Failed to log in.");
     }
+  } else {
+    alert("Please enter a username and password.");
   }
 };
 

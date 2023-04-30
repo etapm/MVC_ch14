@@ -81,7 +81,5 @@
 <script>
   const deleteButtons = document.querySelectorAll('.my-button');
   deleteButtons.forEach((button) => { button.addEventListener('click', (event)
-  => { event.preventDefault(); // Prevent the button from navigating away from
-  the page const postId = button.dataset.id; // Do something else instead, such
-  as show a confirmation dialog or submit a delete request via AJAX }); });
+  => { event.preventDefault(); const postId = button.dataset.id; }); });
 </script>

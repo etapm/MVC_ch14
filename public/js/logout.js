@@ -12,4 +12,7 @@ const logout = async (event) => {
   }
 };
 
-$("#logout").click(logout);
+document.addEventListener("DOMContentLoaded", (event) => {
+  console.log("DOM fully loaded and parsed");
+  document.querySelector("#logout").addEventListener("click", logout);
+});
