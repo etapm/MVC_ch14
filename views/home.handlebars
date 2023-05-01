@@ -1,4 +1,10 @@
 <div class="container">
+  {{#if loggedIn}}
+    <p>Welcome, {{username}}!</p>
+  {{else}}
+    <p>Please log in to continue</p>
+  {{/if}}
+
   <section class="hero is-info">
     <div class="hero-body">
       <div class="container">

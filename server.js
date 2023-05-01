@@ -35,6 +35,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use((req, res, next) => {
+  console.log(`Hit the ${req.path} route.`);
+  next();
+});
+
 app.use(routes);
 
 sequelize.sync({ force: false }).then(() => {

@@ -3,9 +3,17 @@ const { Post, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 const sequelize = require("../config/connection");
 
+router.use((req, res, next) => {
+  console.log("Session: ", req.session);
+  next();
+});
+
 router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
       include: [
         {
           model: User,
@@ -16,42 +24,38 @@ router.get("/", async (req, res) => {
 
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render("home", { posts, loggedIn: req.session.loggedIn });
+    res.render("dashboard", {
+      posts,
+      loggedIn: req.session.logged_in,
+      username: req.session.username,
+    });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get("/post/:id", async (req, res) => {
+router.get("/edit/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
       where: {
         id: req.params.id,
+        user_id: req.session.user_id,
       },
-      include: [
-        {
-          model: User,
-          attributes: ["username"],
-        },
-        {
-          model: Comment,
-          include: [
-            {
-              model: User,
-              attributes: ["username"],
-            },
-          ],
-        },
-      ],
     });
 
     if (postData) {
       const post = postData.get({ plain: true });
-      res.render("post", { post, loggedIn: req.session.loggedIn });
+      res.render("editDeletePost", {
+        post,
+        loggedIn: req.session.logged_in,
+        username: req.session.username,
+      });
     } else {
       res.status(404).json({ message: "No post found with this id" });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

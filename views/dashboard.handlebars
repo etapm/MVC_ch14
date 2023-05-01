@@ -79,7 +79,8 @@
 </div>
 
 <script>
-  const deleteButtons = document.querySelectorAll('.my-button');
-  deleteButtons.forEach((button) => { button.addEventListener('click', (event)
-  => { event.preventDefault(); const postId = button.dataset.id; }); });
+  document.addEventListener("DOMContentLoaded", function() { const deleteButtons
+  = document.querySelectorAll('.my-button'); deleteButtons.forEach((button) => {
+  button.addEventListener('click', (event) => { event.preventDefault(); const
+  postId = button.dataset.id; }); }); });
 </script>
