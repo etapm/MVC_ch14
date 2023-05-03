@@ -82,5 +82,9 @@
   document.addEventListener("DOMContentLoaded", function() { const deleteButtons
   = document.querySelectorAll('.my-button'); deleteButtons.forEach((button) => {
   button.addEventListener('click', (event) => { event.preventDefault(); const
-  postId = button.dataset.id; }); }); });
+  postId = button.dataset.id; fetch(`/api/posts/${postId}`, { method: 'DELETE',
+  }).then((response) => { if (response.ok) { document.location.reload(); } else
+  { alert('Failed to delete post'); } }); }); }); });
 </script>
+
+<script src="/js/dashboard.js"></script>

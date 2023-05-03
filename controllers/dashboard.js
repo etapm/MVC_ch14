@@ -8,7 +8,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
       where: {

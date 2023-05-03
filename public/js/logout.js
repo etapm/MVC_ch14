@@ -15,4 +15,5 @@ const logout = async (event) => {
 document.addEventListener("DOMContentLoaded", (event) => {
   console.log("DOM fully loaded and parsed");
   document.querySelector("#logout").addEventListener("click", logout);
+  console.log("Logout button clicked");
 });

@@ -105,10 +105,17 @@ router.post("/login", async (req, res) => {
 router.post("/logout", (req, res) => {
   console.log("logging out...");
   if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
+    req.session.destroy((err) => {
+      if (err) {
+        console.log("Error destroying session:", err);
+        res.status(500).json(err);
+      } else {
+        console.log("Session destroyed");
+        res.status(204).end();
+      }
     });
   } else {
+    console.log("Session not logged in");
     res.status(404).end();
   }
 });

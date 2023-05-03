@@ -26,9 +26,6 @@ const sess = {
 
 app.use(session(sess));
 
-const userRoutes = require("./controllers/api/userRoutes.js");
-app.use("/api", userRoutes);
-
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.use(express.json());
@@ -38,6 +35,16 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use((req, res, next) => {
   console.log(`Hit the ${req.path} route.`);
   next();
+});
+
+app.post("/api/logout", (req, res) => {
+  if (req.session.logged_in) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
+  }
 });
 
 app.use(routes);
