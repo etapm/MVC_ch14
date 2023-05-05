@@ -1,3 +1,37 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const createPostForm = document.getElementById("create-post-form");
+  if (createPostForm) {
+    createPostForm.addEventListener("submit", handleFormSubmit);
+  }
+});
+
+async function handleFormSubmit(event) {
+  event.preventDefault();
+
+  const title = document.getElementById("post-title").value;
+  const content = document.getElementById("post-content").value;
+
+  try {
+    const response = await fetch("/api/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, content }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create a new post");
+    }
+
+    const data = await response.json();
+    console.log("Post created:", data);
+    location.reload();
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 async function fetchPosts() {
   try {
     const response = await fetch("/api/dashboard/posts");

@@ -1,12 +1,18 @@
-<article class="post">
-  <div class="title">
-    <span><a href="/post/{{id}}">{{title}}</a></span><span
-      style="float:right"
-    >Posted by {{user.username}} on {{format_date created_at}}</span><br />
-    <span style="float:right">{{comments.length}}
-      {{format_plural "comment" comments.length}}</span>
+{{#each posts}}
+  <div class="card">
+    <header class="card-header">
+      <p class="card-header-title">{{this.title}}</p>
+    </header>
+    <div class="card-content">
+      <div class="content">
+        {{this.content}}
+      </div>
+    </div>
+    {{#if logged_in}}
+      <footer class="card-footer">
+        <a href="/edit/{{this.id}}" class="card-footer-item">Edit</a>
+        <a href="#" class="card-footer-item">Delete</a>
+      </footer>
+    {{/if}}
   </div>
-  <div class="content">
-    <p>{{post_text}}</p>
-  </div>
-</article>
+{{/each}}

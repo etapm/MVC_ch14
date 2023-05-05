@@ -31,10 +31,10 @@
               Welcome to your dashboard.
             </h2>
 
-            <div id="posts-container"></div>
+            {{> postInfo posts=posts}}
 
             <h3>Create a New Post:</h3>
-            <form>
+            <form id="create-post-form">
               <div class="form-group">
                 <label for="post-title">Title</label>
                 <input
