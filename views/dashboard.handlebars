@@ -31,22 +31,7 @@
               Welcome to your dashboard.
             </h2>
 
-            {{#if posts.length}}
-              <h3>Your Posts:</h3>
-              <ul>
-                {{#each posts}}
-                  <li>
-                    <a href="/edit-delete-post/{{this.id}}">{{this.title}}</a>
-                    <button
-                      class="my-button"
-                      data-id="{{this.id}}"
-                    >Delete</button>
-                  </li>
-                {{/each}}
-              </ul>
-            {{else}}
-              <p>You have not created any posts yet.</p>
-            {{/if}}
+            <div id="posts-container"></div>
 
             <h3>Create a New Post:</h3>
             <form>

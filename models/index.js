@@ -1,5 +1,9 @@
 const Sequelize = require("sequelize");
-const sequelize = require("../config/connection");
+const config = require("../config/config.js");
+
+const env = process.env.NODE_ENV || "development";
+const { database, username, password, ...otherConfig } = config[env];
+const sequelize = new Sequelize(database, username, password, otherConfig);
 
 const User = require("./User");
 const Post = require("./Post");

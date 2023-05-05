@@ -52,7 +52,7 @@ router.get("/edit/:id", withAuth, async (req, res) => {
         username: req.session.username,
       });
     } else {
-      res.status(404).json({ message: "No post found with this id" });
+      res.render("errorPage", { message: "No post found with this id" });
     }
   } catch (err) {
     console.log(err);

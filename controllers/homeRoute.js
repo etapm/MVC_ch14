@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
     res.render("home", {
       posts,
       logged_in: req.session.logged_in,
-      username: req.session.username, // Add this line to pass the logged in user's username to the template
+      username: req.session.username,
     });
   } catch (err) {
     console.log(err);
@@ -52,7 +52,7 @@ router.get("/post/:id", async (req, res) => {
     res.render("post", {
       singlePost,
       logged_in: req.session.logged_in,
-      username: req.session.username, // Add this line to pass the logged in user's username to the template
+      username: req.session.username,
     });
   } catch (err) {
     console.error(err);

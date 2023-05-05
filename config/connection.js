@@ -1,24 +1,19 @@
 const Sequelize = require("sequelize");
+const path = require("path");
 require("dotenv").config();
 
-let sequelize;
+const configPath = path.resolve(__dirname, ".", "config.js");
+const env = process.env.NODE_ENV || "development";
+const config = require(configPath)[env];
 
-if (process.env.JAWSDB_URL) {
-  sequelize = new Sequelize(process.env.JAWSDB_URL, {
-    logging: console.log,
-  });
-} else {
-  sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-      host: process.env.DB_HOST,
-      dialect: "mysql",
-      port: process.env.DB_PORT,
-      logging: console.log,
-    }
-  );
-}
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  {
+    host: config.host,
+    dialect: "mysql",
+  }
+);
 
 module.exports = sequelize;
