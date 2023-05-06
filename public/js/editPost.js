@@ -20,6 +20,9 @@ const editPostHandler = async (event) => {
   }
 };
 
-document
-  .querySelector("#edit-post-form")
-  .addEventListener("submit", editPostHandler);
+document.addEventListener("DOMContentLoaded", () => {
+  const editPostForm = document.querySelector("#edit-post-form");
+  if (editPostForm) {
+    editPostForm.addEventListener("click", editPostHandler);
+  }
+});

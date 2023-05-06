@@ -16,4 +16,9 @@ const deletePost = async (e) => {
   }
 };
 
-$("#delete-post").click(deletePost);
+document.addEventListener("DOMContentLoaded", () => {
+  const deleteButton = document.getElementById("delete-post");
+  if (deleteButton) {
+    deleteButton.addEventListener("click", deletePost);
+  }
+});

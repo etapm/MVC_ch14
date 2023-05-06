@@ -1,18 +1,31 @@
 {{#each posts}}
   <div class="card">
     <header class="card-header">
-      <p class="card-header-title">{{this.title}}</p>
+      <p class="card-header-title">
+        {{title}}
+      </p>
     </header>
     <div class="card-content">
       <div class="content">
-        {{this.content}}
+        {{content}}
       </div>
     </div>
+    <footer class="card-footer">
+      <div class="post-buttons">
+        <button id="edit-post" class="button is-small is-info" data-post-id="{{id}}">Edit</button>
+        <button id="delete-post" class="button is-small is-danger" data-post-id="{{id}}">Delete</button>
+        <button id="add-comment" class="button is-small is-primary" data-post-id="{{id}}">Comment</button>
+      </div>
+    </footer>
     {{#if logged_in}}
-      <footer class="card-footer">
-        <a href="/edit/{{this.id}}" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item">Delete</a>
-      </footer>
+      <form class="add-comment-form" data-post-id="{{id}}">
+        <textarea
+          id="comment-content"
+          placeholder="Write your comment..."
+        ></textarea>
+        <button type="submit">Add Comment</button>
+      </form>
     {{/if}}
   </div>
 {{/each}}
+{{> comments}}
