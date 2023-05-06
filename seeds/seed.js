@@ -32,22 +32,22 @@ const seedAll = async () => {
       content: "Coding is super hard but rewarding.",
       user_id: 1,
       post_id: 2,
-      created_at: new Date(),
-      updated_at: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       content: "Handlebars is a handy tool, all coders should know about it.",
       user_id: 3,
       post_id: 1,
-      created_at: new Date(),
-      updated_at: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       content: "Will the Warriors win the 2023 Championship?",
       user_id: 2,
       post_id: 3,
-      created_at: new Date(),
-      updated_at: new Date(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ]);
 

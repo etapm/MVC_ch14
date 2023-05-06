@@ -18,7 +18,9 @@
 </section>
 <div class="columns">
   <div class="column is-8">
-    {{> postInfo posts=posts}}
+   {{#each posts}}
+  {{> postInfo}}
+{{/each}}
   </div>
   <div class="column is-4">
     <div class="card">
@@ -39,3 +41,5 @@
 <script src="/js/deletePost.js"></script>
 <script src="/js/editPost.js"></script>
 <script src="/js/addComment.js"></script>
+<script src="/js/postActions.js"></script>
+

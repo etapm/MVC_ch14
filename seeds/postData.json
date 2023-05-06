@@ -7,7 +7,6 @@
   {
     "title": "Handling Requests with Express Routing in Node.js",
     "content": "Express.js provides an 'app' object for handling HTTP requests. Different methods of the 'app' object are used to define routes for different types of requests, with each route specifying a callback function that is called upon receiving the request. In this article, we'll explore how to use Express routing to handle different types of requests.",
-    "topic": "Job Offers",
     "user_id": 2
   },
   {

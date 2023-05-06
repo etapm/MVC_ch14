@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="columns">
+    <div class="column is-8">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            {{singlePost.title}}
+          </p>
+        </header>
+        <div class="card-content">
+          <div class="content">
+            {{singlePost.content}}
+            <br />
+            <strong>Posted by:</strong>
+            {{singlePost.user.username}}
+            <br />
+            <strong>Date:</strong>
+            {{format_date singlePost.createdAt}}
+          </div>
+        </div>
+      </div>
+      <br />
+      {{#if logged_in}}
+        <form id="comment-form">
+          <div class="field">
+            <label class="label">Leave a comment</label>
+            <div class="control">
+              <textarea
+                id="comment-content"
+                class="textarea"
+                placeholder="Write your comment here..."
+              ></textarea>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <button
+                id="add-comment"
+                data-post-id="{{singlePost.id}}"
+                class="button is-link"
+              >Submit Comment</button>
+            </div>
+          </div>
+        </form>
+        <br />
+      {{/if}}
+      {{#each singlePost.comments}}
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">
+              {{user.username}}
+              commented:
+            </p>
+          </header>
+          <div class="card-content">
+            <div class="content">
+              {{content}}
+              <br />
+              <strong>Date:</strong>
+              {{format_date createdAt}}
+            </div>
+          </div>
+        </div>
+        <br />
+      {{/each}}
+
+    </div>
+  </div>
+</div>
+
+<script src="/js/addComment.js"></script>

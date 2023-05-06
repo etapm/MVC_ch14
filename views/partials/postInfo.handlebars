@@ -1,31 +1,41 @@
-{{#each posts}}
-  <div class="card">
-    <header class="card-header">
-      <p class="card-header-title">
-        {{title}}
-      </p>
-    </header>
-    <div class="card-content">
-      <div class="content">
-        {{content}}
-      </div>
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      <a href="/post/{{id}}">{{title}}</a>
+    </p>
+  </header>
+  <div class="card-content">
+    <div class="content">
+      {{truncate content 200}}
+
+      <br />
+      <strong>Posted by:</strong>
+      {{user.username}}
+      <br />
+      <strong>Date:</strong>
+      {{format_date createdAt}}
     </div>
-    <footer class="card-footer">
-      <div class="post-buttons">
-        <button id="edit-post-form" class="button is-small is-info" data-post-id="{{id}}">Edit</button>
-        <button id="delete-post" class="button is-small is-danger" data-post-id="{{id}}">Delete</button>
-        <button id="add-comment" class="button is-small is-primary" data-post-id="{{id}}">Comment</button>
-      </div>
-    </footer>
-    {{#if logged_in}}
-      <form class="add-comment-form" data-post-id="{{id}}">
-        <textarea
-          id="comment-content"
-          placeholder="Write your comment..."
-        ></textarea>
-        <button type="submit">Add Comment</button>
-      </form>
-    {{/if}}
   </div>
-{{/each}}
-{{> comments}}
+  <footer class="card-footer">
+    {{#if isAuthor}}
+      <a
+        href="/dashboard/edit/{{id}}"
+        class="card-footer-item"
+        id="edit-post"
+        data-post-id="{{id}}"
+      >Edit</a>
+      <button
+        class="card-footer-item"
+        id="delete-post"
+        data-post-id="{{id}}"
+      >Delete</button>
+    {{/if}}
+    <a
+      href="/post/{{id}}#comments"
+      class="card-footer-item"
+      id="comment-post"
+      data-post-id="{{id}}"
+    >Comment</a>
+  </footer>
+</div>
+<br />

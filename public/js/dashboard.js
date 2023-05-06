@@ -81,6 +81,7 @@ function renderPosts(posts) {
     .querySelectorAll(".add-comment-form")
     .forEach((form) => form.addEventListener("submit", handleCommentSubmit));
 }
+
 async function handleEditClick(event) {
   const postId = event.target.dataset.id;
 
@@ -106,6 +107,58 @@ async function handleEditClick(event) {
     }
 
     console.log("Post updated:", postId);
+    location.reload();
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function handleDeleteClick(event) {
+  const postId = event.target.dataset.id;
+
+  try {
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to delete the post");
+    }
+
+    console.log("Post deleted:", postId);
+    location.reload();
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function handleCommentSubmit(event) {
+  event.preventDefault();
+
+  const postId = event.target.dataset.id;
+  const commentInput = event.target.querySelector(".comment-input");
+  const comment = commentInput.value.trim();
+
+  if (!comment) {
+    alert("Comment cannot be empty");
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/posts/${postId}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content: comment }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to add a comment");
+    }
+
+    console.log("Comment added:", postId);
+    commentInput.value = "";
     location.reload();
   } catch (error) {
     console.error("Error:", error);

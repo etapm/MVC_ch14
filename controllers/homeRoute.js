@@ -14,10 +14,16 @@ router.get("/", async (req, res) => {
       ],
     });
     const posts = posted.map((post) => post.get({ plain: true }));
-    console.log(posts);
+
+    const postsWithAuthorFlag = posts.map((post) => {
+      return {
+        ...post,
+        isAuthor: req.session.logged_in && req.session.user_id === post.user_id,
+      };
+    });
 
     res.render("home", {
-      posts,
+      posts: postsWithAuthorFlag,
       logged_in: req.session.logged_in,
       username: req.session.username,
     });
@@ -33,15 +39,14 @@ router.get("/post/:id", async (req, res) => {
       include: [
         {
           model: User,
+          attributes: ["username"],
+        },
+        {
+          model: Comment,
           include: [
             {
-              model: Comment,
-              include: [
-                {
-                  model: User,
-                  attributes: ["username"],
-                },
-              ],
+              model: User,
+              attributes: ["username"],
             },
           ],
         },

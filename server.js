@@ -7,7 +7,7 @@ const exphbs = require("express-handlebars");
 
 const routes = require("./controllers");
 const { sequelize } = require("./models");
-const { format_date } = require("./handlebarsHelpers");
+const { format_date, truncate, json } = require("./handlebarsHelpers");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const app = express();
@@ -19,6 +19,8 @@ const hbs = exphbs.create({
   partialsDir: path.join(__dirname, "views/partials"),
   helpers: {
     format_date,
+    truncate,
+    json,
   },
 });
 
