@@ -1,7 +1,7 @@
-const deletePost = async (e) => {
-  e.preventDefault();
-  const urlString = window.location.toString().split("/");
-  const postId = urlString[4];
+const deletePost = async (event) => {
+  event.preventDefault();
+
+  const postId = event.target.getAttribute("data-post-id");
 
   const response = await fetch(`/api/posts/${postId}`, {
     method: "DELETE",
@@ -16,9 +16,8 @@ const deletePost = async (e) => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  const deleteButton = document.getElementById("delete-post");
-  if (deleteButton) {
-    deleteButton.addEventListener("click", deletePost);
+document.addEventListener("click", (event) => {
+  if (event.target.matches("#delete-post")) {
+    deletePost(event);
   }
 });
