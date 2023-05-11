@@ -20,14 +20,12 @@
     {{#if isAuthor}}
       <a
         href="/dashboard/edit/{{id}}"
-        class="card-footer-item"
-        id="edit-post"
-        data-post-id="{{id}}"
+        class="card-footer-item edit-post-button"
+        data-id="{{id}}"
       >Edit</a>
       <button
-        class="card-footer-item"
-        id="delete-post"
-        data-post-id="{{id}}"
+        class="card-footer-item delete-post-button"
+        data-id="{{id}}"
       >Delete</button>
     {{/if}}
     <a

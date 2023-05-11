@@ -13,10 +13,17 @@
               Welcome to your dashboard.
             </h2>
 
-            {{> postInfo posts=posts}}
+            {{#each posts}}
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">{{this.title}}</h5>
+                  <p class="card-text">{{this.content}}</p>
+                </div>
+              </div>
+            {{/each}}
 
             <h3>Create a New Post:</h3>
-            <form id="create-post-form">
+            <form id="new-post-form">
               <div class="form-group">
                 <label for="post-title">Title</label>
                 <input
@@ -45,7 +52,5 @@
   </div>
 </div>
 
-<script src="/js/deletePost.js"></script>
-<script src="/js/editPost.js"></script>
 <script src="/js/addComment.js"></script>
-<script src="/js/postActions.js"></script>
+<script src="/js/new-post.js"></script>
