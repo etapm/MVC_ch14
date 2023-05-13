@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Post } = require("../../models");
+const { Post, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
 
 router.get("/", withAuth, async (req, res) => {
@@ -38,6 +38,7 @@ router.get("/edit/:id", withAuth, async (req, res) => {
         id: req.params.id,
         user_id: req.session.user_id,
       },
+      include: [{ model: Comment, as: "post_comments" }],
     });
 
     if (postData) {
@@ -78,18 +79,54 @@ router.put("/:id", withAuth, async (req, res) => {
 
 router.delete("/:id", withAuth, async (req, res) => {
   try {
+    const postId = req.params.id;
+
+    await Comment.destroy({
+      where: {
+        post_id: postId,
+      },
+    });
+
     const deletedPost = await Post.destroy({
       where: {
-        id: req.params.id,
+        id: postId,
         user_id: req.session.user_id,
       },
     });
 
-    if (deletedPost) {
-      res.status(200).json({ message: "Post deleted successfully" });
-    } else {
+    if (!deletedPost) {
       res.status(404).json({ message: "No post found with this id" });
+    } else {
+      res.status(200).json({ message: "Post deleted successfully" });
     }
+  } catch (err) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ message: "Failed to delete post", error: err.message });
+  }
+});
+router.put("/dashboard/edit/:id", withAuth, async (req, res) => {
+  try {
+    const user = await User.update(
+      {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    if (!user) {
+      res.status(404).json({ message: "No user found with this id!" });
+      return;
+    }
+
+    res.status(200).json(user);
   } catch (err) {
     res.status(500).json(err);
   }

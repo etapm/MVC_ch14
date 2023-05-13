@@ -1,68 +1,12 @@
-const router = require("express").Router();
-const { Post, User, Comment } = require("../models");
-const withAuth = require("../utils/auth");
-const sequelize = require("../config/connection");
+document.querySelectorAll(".delete-post-button").forEach((button) => {
+  button.addEventListener("click", async (event) => {
+    const id = event.target.getAttribute("data-id");
+    const response = await fetch(`/api/posts/${id}`, { method: "DELETE" });
 
-router.use((req, res, next) => {
-  console.log("Session: ", req.session);
-  next();
-});
-
-router.get("/", withAuth, async (req, res) => {
-  try {
-    const postData = await Post.findAll({
-      where: {
-        user_id: req.session.user_id,
-      },
-      include: [
-        {
-          model: User,
-          attributes: ["username"],
-        },
-      ],
-    });
-
-    const posts = postData.map((post) => {
-      const plainPost = post.get({ plain: true });
-      plainPost.isAuthor = true;
-      return plainPost;
-    });
-
-    res.render("dashboard", {
-      posts,
-      loggedIn: req.session.logged_in,
-      username: req.session.username,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
-
-router.get("/edit/:id", withAuth, async (req, res) => {
-  try {
-    const postData = await Post.findOne({
-      where: {
-        id: req.params.id,
-        user_id: req.session.user_id,
-      },
-    });
-
-    if (postData) {
-      const post = postData.get({ plain: true });
-      post.isAuthor = true;
-      res.render("editDeletePost", {
-        post,
-        loggedIn: req.session.logged_in,
-        username: req.session.username,
-      });
+    if (response.ok) {
+      window.location.href = "/dashboard";
     } else {
-      res.render("errorPage", { message: "No post found with this id" });
+      alert("Failed to delete post");
     }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+  });
 });
-
-module.exports = router;

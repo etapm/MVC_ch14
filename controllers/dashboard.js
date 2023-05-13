@@ -22,7 +22,11 @@ router.get("/", withAuth, async (req, res) => {
       ],
     });
 
-    const posts = postData.map((post) => post.get({ plain: true }));
+    const posts = postData.map((post) => {
+      const plainPost = post.get({ plain: true });
+      plainPost.isAuthor = true;
+      return plainPost;
+    });
 
     res.render("dashboard", {
       posts,
@@ -46,6 +50,7 @@ router.get("/edit/:id", withAuth, async (req, res) => {
 
     if (postData) {
       const post = postData.get({ plain: true });
+      post.isAuthor = true;
       res.render("editDeletePost", {
         post,
         loggedIn: req.session.logged_in,

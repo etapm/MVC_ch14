@@ -1,7 +1,7 @@
 const addCommentHandler = async (event) => {
   event.preventDefault();
 
-  const postId = event.target.getAttribute("data-post-id");
+  const postId = event.target.getAttribute("data-id");
   const commentContent = document
     .querySelector("#comment-content")
     .value.trim();

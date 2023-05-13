@@ -20,36 +20,21 @@ const seedAll = async () => {
   console.log("Users have been seeded successfully.");
 
   const posts = await Post.bulkCreate(
-    postData.map((post, index) => ({
+    postData.map((post) => ({
       ...post,
-      user_id: users[index % users.length].id,
+      user_id: users[Math.floor(Math.random() * users.length)].id,
     }))
   );
   console.log("Posts have been seeded successfully.");
 
-  await Comment.bulkCreate([
-    {
-      content: "Coding is super hard but rewarding.",
-      user_id: 1,
-      post_id: 2,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      content: "Handlebars is a handy tool, all coders should know about it.",
-      user_id: 3,
-      post_id: 1,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      content: "Will the Warriors win the 2023 Championship?",
-      user_id: 2,
-      post_id: 3,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  ]);
+  await Comment.bulkCreate(
+    commentData.map((comment) => ({
+      ...comment,
+      user_id: users[Math.floor(Math.random() * users.length)].id,
+      post_id: posts[Math.floor(Math.random() * posts.length)].id,
+    }))
+  );
+  console.log("Comments have been seeded successfully.");
 
   process.exit(0);
 };

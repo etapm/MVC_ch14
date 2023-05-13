@@ -1,7 +1,7 @@
 <div class="container">
   <div class="columns">
     <div class="column is-8 is-offset-2">
-      <form id="edit-post-form" data-post-id="{{post.id}}">
+      <form id="edit-post-form" data-id="{{post.id}}">
         <div class="field">
           <label class="label">Title</label>
           <div class="control">
@@ -26,13 +26,13 @@
         </div>
         <div class="field is-grouped">
           <div class="control">
-            <button class="button is-link">Save Changes</button>
+            <button class="button is-link" type="submit">Save Changes</button>
           </div>
           <div class="control">
             <button
               id="delete-post"
-              class="button is-danger"
-              data-post-id="{{post.id}}"
+              class="button is-danger delete-post-button"
+              data-id="{{post.id}}"
             >Delete Post</button>
           </div>
         </div>
@@ -40,3 +40,5 @@
     </div>
   </div>
 </div>
+
+<script src="/js/postActions.js"></script>
