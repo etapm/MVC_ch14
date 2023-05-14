@@ -1,28 +1,42 @@
-const addCommentHandler = async (event) => {
-  event.preventDefault();
+document.addEventListener("DOMContentLoaded", function () {
+  const commentForm = document.getElementById("add-comment-form");
+  if (!commentForm) {
+    console.log("Comment form not found");
+    return;
+  }
 
-  const postId = event.target.getAttribute("data-id");
-  const commentContent = document
-    .querySelector("#comment-content")
-    .value.trim();
+  commentForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  if (commentContent) {
-    const response = await fetch(`/api/comments`, {
-      method: "POST",
-      body: JSON.stringify({ post_id: postId, content: commentContent }),
-      headers: { "Content-Type": "application/json" },
-    });
-
-    if (response.ok) {
-      document.location.reload();
-    } else {
-      alert("Failed to add comment.");
+    const contentElement = document.getElementById("comment-content");
+    const content = contentElement ? contentElement.value.trim() : null;
+    if (!content) {
+      console.log("No content found");
+      return;
     }
-  }
-};
 
-document.addEventListener("click", (event) => {
-  if (event.target.matches("#add-comment")) {
-    addCommentHandler(event);
-  }
+    const postId = commentForm.dataset.id;
+    if (!postId) {
+      console.log("No post ID found");
+      return;
+    }
+
+    console.log(`Submitting comment '${content}' for post '${postId}'`);
+
+    fetch(`/api/posts/${postId}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          location.reload();
+        } else {
+          alert("Failed to submit comment");
+        }
+      })
+      .catch((err) => console.error(err));
+  });
 });

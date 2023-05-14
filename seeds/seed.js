@@ -1,6 +1,6 @@
 require("dotenv").config();
-const User = require("../models/User");
-const Post = require("../models/Post");
+const User = require("../models/user");
+const Post = require("../models/post");
 const Comment = require("../models/Comment");
 
 const userData = require("./userData.json");

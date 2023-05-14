@@ -21,7 +21,8 @@
       </div>
       <br />
       {{#if logged_in}}
-        <form id="comment-form">
+        <form id="add-comment-form" data-id="{{singlePost.id}}">
+
           <div class="field">
             <label class="label">Leave a comment</label>
             <div class="control">
@@ -35,9 +36,10 @@
           <div class="field">
             <div class="control">
               <button
-                id="add-comment"
+                id="add-comment-btn"
                 data-id="{{singlePost.id}}"
                 class="button is-link"
+                type="submit"
               >Submit Comment</button>
             </div>
           </div>

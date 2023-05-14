@@ -5,8 +5,8 @@ const env = process.env.NODE_ENV || "development";
 const { database, username, password, ...otherConfig } = config[env];
 const sequelize = new Sequelize(database, username, password, otherConfig);
 
-const User = require("./User");
-const Post = require("./Post");
+const User = require("./user");
+const Post = require("./post");
 const Comment = require("./Comment");
 
 User.hasMany(Post, {
