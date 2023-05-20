@@ -36,3 +36,7 @@ nav a {
   max-width: 85%;
   margin: 0 auto;
 }
+
+.hero.is-info {
+  background-color: #383f51 !important;
+}
