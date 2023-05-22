@@ -11,7 +11,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/etapm/MVC_ch14.git"
+    "url": "git+https://github.com/etapm/MVC_ch14.git",
+    "engines": {
+      "node": "16.16.0",
+      "npm": "8.11.0"
+    }
   },
   "author": "",
   "license": "MIT",
