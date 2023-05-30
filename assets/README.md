@@ -36,7 +36,6 @@ here is the link to the deployed application on Heroku: [Click Here]()
                 DB_NAME=your_database_name
                 DB_USER=your_mysql_username
                 DB_PASSWORD=your_mysql_password
-                SESSION_SECRET=your_session_secret
 
 Review the code on the GitHub repository by visiting the [GitHub Repository](https://github.com/etapm/M19_TextEditor).
 

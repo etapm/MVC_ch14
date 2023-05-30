@@ -11,13 +11,11 @@ const sequelize = require("../config/connection");
 
 const seedAll = async () => {
   await sequelize.sync({ force: true });
-  console.log("Database has been synced successfully.");
 
   const users = await User.bulkCreate(userData, {
     individualHooks: true,
     returning: true,
   });
-  console.log("Users have been seeded successfully.");
 
   const posts = await Post.bulkCreate(
     postData.map((post) => ({
